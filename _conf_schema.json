@@ -1,0 +1,84 @@
+{
+  "enabled": {
+    "description": "总开关（默认关闭）",
+    "hint": "只有设为 true，插件加载时才会自动开跑。默认 false，建议先手动 /烧token 开 试一次。改这一项后需要重载插件才生效。",
+    "type": "bool",
+    "default": false
+  },
+  "interval_seconds": {
+    "description": "轮询间隔（秒）",
+    "hint": "两次空转之间的等待。硬限制 15–3600 秒，写更小也会被压到 15。第一发在间隔之后，留出喊停的时间。",
+    "type": "int",
+    "default": 60
+  },
+  "max_tokens_per_request": {
+    "description": "单次请求 token 上限",
+    "hint": "硬限制 1–512。只在 provider 支持 max_tokens 时下发；实际计费以服务端为准。",
+    "type": "int",
+    "default": 16
+  },
+  "daily_budget_tokens": {
+    "description": "每日 token 预算",
+    "hint": "硬限制 500–200000。按本地日期跨天重置，用完自动停；预算落盘，重启不清零。",
+    "type": "int",
+    "default": 20000
+  },
+  "daily_max_requests": {
+    "description": "每日请求次数上限",
+    "hint": "硬限制 1–500。和 token 预算同时生效，先到先停。",
+    "type": "int",
+    "default": 100
+  },
+  "max_runtime_minutes": {
+    "description": "单次开启最长运行（分钟）",
+    "hint": "硬限制 1–360。到点自动停，防止开完忘了关。",
+    "type": "int",
+    "default": 30
+  },
+  "prompt": {
+    "description": "空转用的短提示",
+    "hint": "一句没有任何业务意义的话，最长 64 字符，超长自动截断。别往里塞长文，那是白烧钱。",
+    "type": "string",
+    "default": "嗯"
+  },
+  "system_prompt": {
+    "description": "可选的系统提示",
+    "hint": "留空即不发系统提示。也会算进 token。",
+    "type": "string",
+    "default": ""
+  },
+  "provider_id": {
+    "description": "指定 LLM 提供方 ID",
+    "hint": "留空表示用当前会话默认的 provider。填了但找不到时会退回默认。",
+    "type": "string",
+    "default": ""
+  },
+  "request_timeout": {
+    "description": "单次调用超时（秒）",
+    "hint": "硬限制 5–300，默认 60。超时按失败计，连续失败 3 次自动停。",
+    "type": "int",
+    "default": 60
+  },
+  "permission": {
+    "description": "指令权限",
+    "hint": "空转直接烧额度，默认只允许管理员操作。",
+    "type": "string",
+    "options": [
+      "仅管理员",
+      "所有人"
+    ],
+    "default": "仅管理员"
+  },
+  "extra_user_ids": {
+    "description": "额外放行的用户 ID",
+    "hint": "「仅管理员」模式下，这里填的 ID 也能开关空转。",
+    "type": "list",
+    "default": []
+  },
+  "notify_session": {
+    "description": "自动停止时的通知会话",
+    "hint": "填 unified_msg_origin，如 aiocqhttp:GroupMessage:123。留空则只写日志。手动开启时会自动用当前会话。",
+    "type": "string",
+    "default": ""
+  }
+}

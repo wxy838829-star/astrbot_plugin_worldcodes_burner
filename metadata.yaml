@@ -1,0 +1,6 @@
+name: astrbot_plugin_worldcodes_burner
+display_name: 烧 Token（空转消耗）
+desc: 定时向当前 LLM 提交无业务意义的短提示以消耗 token；默认关闭，间隔/单次额度/每日预算全部有硬上限，可随时停止。
+version: v1.0.0
+author: WorldCodes
+repo: https://worldcodes.online
